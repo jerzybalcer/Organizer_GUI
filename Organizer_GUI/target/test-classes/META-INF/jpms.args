@@ -1,0 +1,4 @@
+--patch-module
+pl.jerzybalcer.organizer_gui=_
+--add-reads
+pl.jerzybalcer.organizer_gui=ALL-UNNAMED

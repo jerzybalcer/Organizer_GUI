@@ -1,0 +1,6 @@
+pl\jerzybalcer\organizer_gui\App.class
+pl\jerzybalcer\organizer_gui\model\TaskExistsException.class
+pl\jerzybalcer\organizer_gui\model\TaskList.class
+module-info.class
+pl\jerzybalcer\organizer_gui\controller\MenuController.class
+pl\jerzybalcer\organizer_gui\model\Task.class

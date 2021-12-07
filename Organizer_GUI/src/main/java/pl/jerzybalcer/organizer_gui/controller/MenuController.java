@@ -1,4 +1,4 @@
-package pl.jerzybalcer.organizer_gui;
+package pl.jerzybalcer.organizer_gui.controller;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
