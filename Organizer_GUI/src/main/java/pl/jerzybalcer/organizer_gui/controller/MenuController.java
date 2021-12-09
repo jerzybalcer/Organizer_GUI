@@ -3,8 +3,7 @@ package pl.jerzybalcer.organizer_gui.controller;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.cell.PropertyValueFactory;
 import pl.jerzybalcer.organizer_gui.model.Task;
 import pl.jerzybalcer.organizer_gui.model.TaskExistsException;
 import pl.jerzybalcer.organizer_gui.model.TaskList;
@@ -30,9 +29,9 @@ public class MenuController {
     @FXML
     private TextField idMark;
 
-    /** Element that displays current list of tasks */
+    /** Table where all to do tasks are being displayed */
     @FXML
-    private ScrollPane taskScrollPane;
+    private TableView tasksTable;
 
     /** Constructs menu controller class and creates task list manager */
     public MenuController(){
@@ -55,7 +54,7 @@ public class MenuController {
             }catch(TaskExistsException e){
                 showAlert(e.getMessage());
             }
-            updateScrollPane();
+            updateDisplayedTasks();
         }
 
         description.setText("");
@@ -78,7 +77,7 @@ public class MenuController {
                 if(!taskList.remove(parsedId)){
                     showAlert("There's no task with such id!");
                 }else{
-                    updateScrollPane();
+                    updateDisplayedTasks();
                 }
 
             }catch(NumberFormatException e){
@@ -106,7 +105,7 @@ public class MenuController {
                 if(!taskList.makeDone(parsedId)){
                     showAlert("There's no task with such id!");
                 }else{
-                    updateScrollPane();
+                    updateDisplayedTasks();
                 }
 
             }catch(NumberFormatException e){
@@ -118,21 +117,27 @@ public class MenuController {
     }
 
     /** Updates task list on the screen every time it is changed */
-    private void updateScrollPane(){
-        taskScrollPane.setContent(new Pane());
+    private void updateDisplayedTasks(){
 
-        GridPane grid = new GridPane();
+        tasksTable.getItems().clear();
 
-        int i = 0;
+        TableColumn c1 = (TableColumn) tasksTable.getColumns().get(0);
+        TableColumn c2 = (TableColumn) tasksTable.getColumns().get(1);
+        TableColumn c3 = (TableColumn) tasksTable.getColumns().get(2);
+
+        c1.setCellValueFactory(
+                new PropertyValueFactory<>("id")
+        );
+        c2.setCellValueFactory(
+                new PropertyValueFactory<>("description")
+        );
+        c3.setCellValueFactory(
+                new PropertyValueFactory<>("done")
+        );
 
         for(Task task : taskList.list){
-            grid.addRow(i);
-            grid.add(new Label("ID: " + task.getId() + " | TASK: " + task.getDesc() + " | DONE?: " + task.isDone()), 0, i);
-
-            i++;
+            tasksTable.getItems().add(task);
         }
-
-        taskScrollPane.setContent(grid);
     }
 
     /** Creates and shows alert box with specified message

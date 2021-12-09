@@ -19,7 +19,7 @@ public class TaskList {
  */
     public void add(String description) throws TaskExistsException{
         for(Task task : list){
-            if(task.getDesc().equals(description)){
+            if(task.getDescription().equals(description)){
                 throw new TaskExistsException("Task already exists!");
             }
         }

@@ -1,6 +1,5 @@
 package pl.jerzybalcer.organizer_gui.tests;
 
-import org.junit.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -44,7 +43,7 @@ public class TaskListTests {
 
         try{
             taskList.add(desc);
-            assertTrue(startSize+1 == taskList.list.size() && taskList.list.get(startSize).getDesc().equals(desc));
+            assertTrue(startSize+1 == taskList.list.size() && taskList.list.get(startSize).getDescription().equals(desc));
         }catch (TaskExistsException e){
             assertTrue(startSize == taskList.list.size());
         }
@@ -86,9 +85,9 @@ public class TaskListTests {
 
         if(removeResult == false && (id < 0 || id > taskList.list.size()-1)){
             assertTrue(true);
-        }else if(removeResult == true && taskList.list.get(id).isDone()){
+        }else if(removeResult == true && taskList.list.get(id).getDone()){
             assertTrue(true);
-        }else if(removeResult == false && taskList.list.get(id).isDone() == false){
+        }else if(removeResult == false && taskList.list.get(id).getDone() == false){
             assertTrue(true);
         }
     }
