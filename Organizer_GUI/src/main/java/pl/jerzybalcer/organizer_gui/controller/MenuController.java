@@ -1,6 +1,8 @@
 package pl.jerzybalcer.organizer_gui.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -143,7 +145,7 @@ public class MenuController {
     /** Creates and shows alert box with specified message
      * @param msg string to show as message
      * */
-    private void showAlert(String msg){
-        (new Alert(Alert.AlertType.ERROR, msg)).show();
+    private void showAlert(String ... msg){
+        Arrays.stream(msg).forEach(m -> (new Alert(Alert.AlertType.ERROR, m)).show());
     }
 }
